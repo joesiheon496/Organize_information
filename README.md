@@ -35,9 +35,6 @@
 최근 연구에서는 글의 벡터화 과정에서 문맥을 반영하는데 좋은 성능을 보이는 Bidirectional Embedding Representation from Transformer (BERT)를 주로 사용되고 있다. 
 
 # Contrastive Learning
-특히 특허 문서를 처리하는데 더 적합한 모델을 사용하기 위해 특허 문서로 미세조정한 PatentBERT가 활용되고 있다. 
-
-그리고 판별하고자하는 특허와 유사한 특허를 찾기 위해서, 데이터 비교를 통해 학습시키는 Contrastive learning을 활용한 사례도 있다. 
 
 유사한 특허를 탐색하는 용도로 쓰이던 PatentBERT와 Contrastive loss를 활용하여 Contrastive learning을 진행했다.  
 
@@ -56,9 +53,13 @@ PatentBERT와 Contrastive learning으로 미세조정한 모델은 BERT에 대�
 $$L_{i} = \sum_{j \in P}(y_{ij}D_{ij}^{2}+(1-y_{ij})\text{max}[0,\alpha-D_{ij}^{2}])$$
 
 $i$와 $j$는 특허 쌍 $P$에 포함된 특허로, $y_{ij}$는 두 특허의 도메인이 일치하는지를 나타내는 라벨이다. 
+
 특허 $i$와 $j$가 같은 섹션인 경우 $y_{ij}=1$이 되고, 다른 섹션이면 $y_{ij}=0$을 나타낸다. 
+
 $\alpha$는 하이퍼파라미터로, 값을 조절함으로써 다른 섹션 특허와의 최소 거리를 설정 할 수 있다. 
+
 Contrastive learning은 데이터 쌍에 대해 손실을 계산하여 모델을 학습시킨다. 
+
 따라서 데이터 쌍을 구성하는 방법에 따라 학습 결과가 달라질 수 있다.
 <img src='https://user-images.githubusercontent.com/56191064/214011050-2b3a7fe1-7a0b-4c89-85a0-2a9425d8864c.png' width="45%" height="45%">
 <img src='https://user-images.githubusercontent.com/56191064/214011222-f4867d6b-d149-4b5d-974a-631dbc01d715.png' width="45%" height="45%">
