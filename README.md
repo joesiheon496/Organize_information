@@ -34,6 +34,7 @@
 
 최근 연구에서는 글의 벡터화 과정에서 문맥을 반영하는데 좋은 성능을 보이는 Bidirectional Embedding Representation from Transformer (BERT)를 주로 사용되고 있다. 
 
+# Contrastive Learning
 특히 특허 문서를 처리하는데 더 적합한 모델을 사용하기 위해 특허 문서로 미세조정한 PatentBERT가 활용되고 있다. 
 
 그리고 판별하고자하는 특허와 유사한 특허를 찾기 위해서, 데이터 비교를 통해 학습시키는 Contrastive learning을 활용한 사례도 있다. 
