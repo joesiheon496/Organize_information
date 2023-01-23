@@ -38,7 +38,7 @@
 
 그리고 판별하고자하는 특허와 유사한 특허를 찾기 위해서, 데이터 비교를 통해 학습시키는 Contrastive learning을 활용한 사례도 있다. 
 
-유사한 특허를 탐색하는 용도로 쓰이던 PatentBERT와 Contrastive loss\cite{contrastiveloss}를 활용하여 Contrastive learning을 진행했다.  
+유사한 특허를 탐색하는 용도로 쓰이던 PatentBERT와 Contrastive loss를 활용하여 Contrastive learning을 진행했다.  
 
 우리는 특허 문서의 초록이라는 텍스트 형태의 데이터를 잠재공간에 올리기 위해, PatentBERT를 이용해서 텍스트 데이터를 벡터화했다.  
 
@@ -62,24 +62,14 @@ Contrastive learning은 데이터 쌍에 대해 손실을 계산하여 모델을
 
 # 결과
 
-본 연구의 방법론을 적용했을 때와 적용하기 전의 잠재공간 상 특허 분포를 비교하기 위해 미세조정한 순방향 신경망의 출력과 BERT의 출력을 t-SNE\cite{t-SNE}로 시각화했다~(Fig.~\ref{fig:embedding_value}). 
+본 연구의 방법론을 적용했을 때와 적용하기 전의 잠재공간 상 특허 분포를 비교하기 위해 미세조정한 순방향 신경망의 출력과 BERT의 출력을 t-SNE로 시각화했다. 
 산점도에서 점은 특허로, 특허간의 유사도가 높을수록 가깝게 위치한다. 
-Fig.~\ref{fig:embedding_value}(a)는 PatentBERT로 특허를 벡터화 시킨 후 잠재공간 상에 나타낸 그림으로 여러 섹션들이 섞여 있는 것을 알 수 있다. 
+(a)는 PatentBERT로 특허를 벡터화 시킨 후 잠재공간 상에 나타낸 그림으로 여러 섹션들이 섞여 있는 것을 알 수 있다. 
 BERT모델들은 글 내용과 관련하여 벡터화하므로 섹션별로 분리가 되지 않은 것은 당연한 결과이다. 
-반면 Contrastive learning으로 미세조정한 순방향 신경망 모델의 출력을 잠재공간 상에 나타낸 Fig.~\ref{fig:embedding_value}(b)는 같은 섹션끼리 잘 모여 도메인 군집화가 이루어진 것을 확인할 수 있다. 
+반면 Contrastive learning으로 미세조정한 순방향 신경망 모델의 출력을 잠재공간 상에 나타낸(b)는 같은 섹션끼리 잘 모여 도메인 군집화가 이루어진 것을 확인할 수 있다. 
 잠재공간에 단순히 글의 유사도에 의해서만 배치시키는 BERT 모델과는 다르게 Contrastive learning은 섹션별로 도메인 군집화까지 시키므로, 새로운 특허에 대해 유사한 특허들과 더 쉽게 비교할 수 있게 된다. 
 
-\begin{figure}[t]
-\begin{tabular}{cc}
-\includegraphics[width=.495\textwidth]{imgs/ConfusionMatrixBERT.pdf}&
-\includegraphics[width=.495\textwidth]{imgs/ConfusionMatrixPatentBERT.pdf}\\
-\includegraphics[width=.495\textwidth]{imgs/bertContrastive.pdf}&
-\includegraphics[width=.495\textwidth]{imgs/PatentbertContrastive.pdf}
-\end{tabular}
-\caption[Confusion]{\label{fig:confusionmatrix}Confusion Matrix for Patent Clustering. (a) Confusion Matrix of BERT, (b) Confusion Matrix of Patent BERT, (c) Confusion Matrix of BERT + Contrastive loss, and (d) Confusion Matrix of Patent BERT + Contrastive loss, which is more accurate than the existing section.}
-\end{figure}
-
-Figure.~\ref{fig:embedding_value}의 군집화를 정량적으로 평가하기 위해 특허들이 어떤 도메인의 군집 중심에 가장 가까운지 측정했다. 
+의 군집화를 정량적으로 평가하기 위해 특허들이 어떤 도메인의 군집 중심에 가장 가까운지 측정했다. 
 군집의 중심은 테스트 데이터로 사용되는 특허들을 모두 잠재공간 상에 나타내고 각 섹션별 특허 벡터들의 평균으로 계산하여 클러스터의 무게 중심을 의미한다. 
 모델의 성능을 평가하기 위해 테스트 특허 문서들을 잠재공간 입력하여 가장 가까운 도메인 군집의 중심과 거리를 측정하고, 가장 가까운 도메인 중심을 입력해준 테스트 특허 문서의 섹션으로 생각했다. 
 특허들의 섹션과 가장 가까운 도메인 군집의 섹션이 일치하는 정도를 나타낸 것이 Fig.~\ref{fig:confusionmatrix}이다. 
@@ -88,32 +78,22 @@ Figure.~\ref{fig:embedding_value}의 군집화를 정량적으로 평가하기 �
 반면 Contrastive Learning으로 미세조정을 진행 후 측정한 혼동행렬 Fig.~\ref{fig:confusionmatrix}(c)와 (d)는 미세조정을 하지 않을 때보다 섹션들을 더 골고루 맞추는 것을 알 수 있다. 
 이는 미세조정이 섹션 분류에 도움이 되는 것을 알 수 있다. 
 그리고 Fig~\ref{fig:confusionmatrix} (c)와 (d)를 비교해보면 PatentBERT를 활용한 경우에 섹션별 정확도가 더 높은 것을 알 수 있다. 
-따라서 본 연구에서 활용한 PatentBERT와 Contrastive learning은 특허 섹션 분류에 있어 성능을 높여주는 것을 Fig.~\ref{fig:confusionmatrix}로부터 알 수 있다.
-
-%%% 자카드유사도 & 유클리디안 거리 산점도 그림
-\begin{figure}[t]
-\begin{tabular}{cc}
-\includegraphics[width=.495\textwidth]{imgs/jaccardeuclidean_a.pdf}&
-\includegraphics[width=.495\textwidth]{imgs/jaccardeuclidean_b.pdf}\\
-\includegraphics[width=.495\textwidth]{imgs/jaccardeuclidean_c.pdf}&
-\includegraphics[width=.495\textwidth]{imgs/jaccardeuclidean_d.pdf}
-\end{tabular}
-\caption[Confusion]{\label{fig:jaccard}Scatter plot of Jaccard similarity and Euclidean distance. (a)Scatterplot showing Jaccard similarity and Euclidean distance of simple BERT, (b)Scatterplot of Jaccard similarity and Euclidean distance of PatentBERT, (c)Scatterplot of Jaccard similarity and Euclidean distance after learning simple BERT with Contrastive loss, (d)Scatter plot of Jaccard similarity and Euclidean distance after learning PatentBERT with Contrastive loss}
-\end{figure}
-
-\begin{figure}[t]
-\includegraphics[width=.780\textwidth]{imgs/PatentExample2.pdf}
-\caption{Examples with the same patent content but with low jaccard similarity, Both patents are related to the entrance of the can container, but the similarity of the jaccard was measured relatively low because the word composition of the text was different.} 
-\label{fig:patentexample}
-\end{figure}
+따라서 본 연구에서 활용한 PatentBERT와 Contrastive learning은 특허 섹션 분류에 있어 성능을 높여주는 것을 로부터 알 수 있다.
 
 USPTO에 기재되어있는 특허간의 자카드 유사도와 잠재공간 상에서 유클리드 거리 관계를 확인하기 위해 Fig.~\ref{fig:jaccard}와 같이 산점도 그림을 나타냈다. 
+
 자카드 유사도와 유클리드 거리 관계를 확인함으로써 잠재공간 상에서 특허들의 분포가 자카드 유사도와 연관이 있는지 비교했다. 
+
 Fig.~\ref{fig:jaccard}(a)와 (b)는 Contrastive learning으로 미세조정하지 않고 BERT와 PatentBERT의 출력으로 얻은 그림으로, 자카드 유사도가 감소함에 따라 유클리드 거리가 증가하는 경향이 있다. 
+
 BERT모델들의 경우 특허 문서끼리 단어 구성이 유사성을 확인하는 자카드 유사도가 높을 수록 가깝게 배치하는 경향이 보였다. 
+
 반면 Contrastive learning으로 미세조정 후 나타낸 Fig.~\ref{fig:jaccard}(c)와 (d)에서는 자카드 유사도와 유클리디안 거리 사이에 뚜렷한 경향이 나타나지 않는다. 
+
 따라서 Contrastive learning를 거친 특허 문서들은 잠재공간에서 자카드 유사도와 연관 없이 배치되어있다는 것을 의미한다. 
+
 실제로 유사한 특허 문서라 해도 단어의 구성이 다르면 자카드 유사도가 작은 값으로 측정될 수 있다. 
+
 따라서 본 연구에서 사용한 모델은 단어의 구성이 다른 특허 문서의 경우에도 내용의 유사도에 따라 판단할 수 있다. 
 
 우리는 잠재공간 상에서 특허들간의 유클리드 거리에 문맥이 반영되었는지 확인하기 위해 인접한 특허들에 대한 내용을 확인했다. 
