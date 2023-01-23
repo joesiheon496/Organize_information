@@ -61,5 +61,6 @@ $\alpha$는 하이퍼파라미터로, 값을 조절함으로써 다른 섹션 �
 Contrastive learning은 데이터 쌍에 대해 손실을 계산하여 모델을 학습시킨다. 
 
 따라서 데이터 쌍을 구성하는 방법에 따라 학습 결과가 달라질 수 있다.
+
 <img src='https://user-images.githubusercontent.com/56191064/214011050-2b3a7fe1-7a0b-4c89-85a0-2a9425d8864c.png' width="45%" height="45%">
 <img src='https://user-images.githubusercontent.com/56191064/214011222-f4867d6b-d149-4b5d-974a-631dbc01d715.png' width="45%" height="45%">
