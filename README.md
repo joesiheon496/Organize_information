@@ -64,13 +64,14 @@ Contrastive learning은 데이터 쌍에 대해 손실을 계산하여 모델을
 <img src='https://user-images.githubusercontent.com/56191064/214011222-f4867d6b-d149-4b5d-974a-631dbc01d715.png' width="45%" height="45%">
 
 # Cluster 측정
-<img src = 'https://github.com/joesiheon496/Organize_information/files/10532497/ConfusionMatrixBERT.pdf', width = "45%" height = "45%">
-<img src = 'https://github.com/joesiheon496/Organize_information/files/10532504/PatentbertContrastive.pdf', width = "45%" height = "45%">
+
+<img src = 'https://user-images.githubusercontent.com/56191064/215394947-c2a34f3f-b9bd-4148-93db-231aaeef39ac.png', width = "45%" height = "45%">
+<img src = 'https://user-images.githubusercontent.com/56191064/215395100-735a97fe-2541-4138-ac8e-787073e656e6.png', width = "45%" height = "45%">
 
 군집화를 정량적으로 평가하기 위해 특허들이 어떤 도메인의 군집 중심에 가장 가까운지 측정했다. 
 군집의 중심은 테스트 데이터로 사용되는 특허들을 모두 잠재공간 상에 나타내고 각 섹션별 특허 벡터들의 평균으로 계산하여 클러스터의 무게 중심을 의미한다. 
 모델의 성능을 평가하기 위해 테스트 특허 문서들을 잠재공간 입력하여 가장 가까운 도메인 군집의 중심과 거리를 측정하고, 가장 가까운 도메인 중심을 입력해준 테스트 특허 문서의 섹션으로 생각했다. 
 
-미세조정을 하지 않은 모델의 결과는 특정 섹션들에 대해서 정확도가 낮은 것을 볼 수 있다. 
+첫번째 사진인 미세조정을 하지 않은 모델의 결과는 특정 섹션들에 대해서 정확도가 낮은 것을 볼 수 있다. 
 
-반면 Contrastive Learning으로 미세조정을 진행 후 측정한 혼동행렬은 미세조정을 하지 않을 때보다 섹션들을 더 골고루 맞추는 것을 관찰할 수 있다. 
+반면 두번째 사진인 Contrastive Learning으로 미세조정을 진행 후 측정한 혼동행렬은 미세조정을 하지 않을 때보다 섹션들을 더 골고루 맞추는 것을 관찰할 수 있다. 
